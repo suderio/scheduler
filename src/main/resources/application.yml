@@ -1,0 +1,51 @@
+scheduler:
+  year: 2023
+  month: 02
+  employees:
+    - V
+    - J
+    - R
+    - G
+  unavailable:
+    V:
+      - 01
+      - 10
+      - 11
+      - 12
+      - 15
+      - 19
+    J:
+      - 29
+  desired:
+    G:
+      - 15
+  undesired:
+    R:
+      - 25
+      - 29
+  maxPerWeek:
+    V: 2
+    J: 3
+    G: 1
+    R: 2
+quarkus:
+  live-reload:
+    instrumentation: true
+  log:
+    level: WARN
+    console:
+      format: "%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c{3.}] (%t) %s%e%n"
+    category:
+      "net.technearts":
+        level: INFO
+        handlers: "net.technearts"
+        use-parent-handlers: false
+    handler:
+      console:
+        "net.technearts":
+          format: "%s%e%n"
+  application:
+    ui-header: "{applicationName} (powered by Technearts)"
+  banner:
+    enabled: true
+    path:
