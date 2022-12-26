@@ -20,4 +20,6 @@ interface SchedulerConfig {
     fun undesired(): Map<String?, List<Int?>?>?
     @WithName("maxPerWeek")
     fun maxShiftsPerWeek(): Map<String?, Int?>?
+    @WithName("createConfig")
+    fun createConfig(): Boolean
 }

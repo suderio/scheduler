@@ -1,6 +1,7 @@
 scheduler:
   year: 2023
   month: 02
+  createConfig: true
   employees:
     - V
     - J
@@ -28,6 +29,9 @@ scheduler:
     J: 3
     G: 1
     R: 2
+"%dev":
+  scheduler:
+    createConfig: false
 quarkus:
   live-reload:
     instrumentation: true
@@ -44,8 +48,8 @@ quarkus:
       console:
         "net.technearts":
           format: "%s%e%n"
-  application:
-    ui-header: "{applicationName} (powered by Technearts)"
   banner:
-    enabled: true
-    path:
+    enabled: false
+  native:
+    compression:
+      level: 10

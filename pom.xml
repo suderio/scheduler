@@ -5,6 +5,37 @@
   <groupId>net.technearts</groupId>
   <artifactId>scheduler</artifactId>
   <version>1.0.0-SNAPSHOT</version>
+  <name>scheduler</name>
+  <description>A tool to schedule employees</description>
+  <url>https://suderio.github.io/fkeytoolhelper</url>
+  <organization>
+    <name>Technearts</name>
+    <url>https://www.technearts.net</url>
+  </organization>
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://raw.githubusercontent.com/suderio/scheduler/main/LICENSE</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>suderio</id>
+      <email>paulo.suderio@gmail.com</email>
+      <name>Paulo Suderio</name>
+    </developer>
+  </developers>
+  <scm>
+    <url>https://github.com/suderio/scheduler</url>
+    <connection>scm:git:http://github.com/suderio/scheduler.git</connection>
+    <developerConnection>scm:git:https://github.com/suderio/scheduler.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+  <issueManagement>
+    <url>https://github.com/suderio/scheduler/issues</url>
+    <system>github</system>
+  </issueManagement>
   <properties>
     <compiler-plugin.version>3.10.1</compiler-plugin.version>
     <kotlin.version>1.7.21</kotlin.version>
@@ -74,6 +105,7 @@
   <build>
     <sourceDirectory>src/main/kotlin</sourceDirectory>
     <testSourceDirectory>src/test/kotlin</testSourceDirectory>
+    <finalName>${project.name}</finalName>
     <plugins>
       <plugin>
         <groupId>${quarkus.platform.group-id}</groupId>
@@ -166,8 +198,62 @@
           </pluginOptions>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.3.0</version>
+        <executions>
+          <execution>
+            <id>attach-artifacts</id>
+            <phase>package</phase>
+            <goals>
+              <goal>attach-artifact</goal>
+            </goals>
+            <configuration>
+              <artifacts>
+                <artifact>
+                  <file>${project.build.directory}/${project.artifactId}</file>
+                  <type>x86_64-Linux</type>
+                  <classifier>native</classifier>
+                </artifact>
+              </artifacts>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.4.0</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/suderio/scheduler</url>
+    </repository>
+  </distributionManagement>
   <profiles>
     <profile>
       <id>native</id>
